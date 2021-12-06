@@ -1,0 +1,21 @@
+version: '3'
+services:
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ['/bin/sh', '-c', 'npm i && npm run dev']
+    environment:
+      - HOST=0.0.0.0
+      - PORT=3000
+      - PROXY_API_URL=http://api:3001
+    volumes:
+      - .:/usr/app/frontend
+    ports:
+      - "3000:3000"
+
+networks:
+  default:
+    external:
+      name: sky_com
